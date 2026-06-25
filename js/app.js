@@ -10,6 +10,10 @@ const builtInTracks = [
   { id: 'AML08', name: 'AML08.mp3', src: 'audio/AML08.mp3' },
   { id: 'AML09', name: 'AML09.mp3', src: 'audio/AML09.mp3' },
   { id: 'AML10', name: 'AML10.mp3', src: 'audio/AML10.mp3' },
+  { id: 'AML11', name: 'AML11.mp3', src: 'audio/AML11.mp3' },
+  { id: 'AML12', name: 'AML12.mp3', src: 'audio/AML12.mp3' },
+  { id: 'AML14', name: 'AML14.mp3', src: 'audio/AML14.mp3' },
+  { id: 'AML15', name: 'AML15.mp3', src: 'audio/AML15.mp3' },
 ];
 
 // ── Storage ──
