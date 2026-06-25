@@ -5,15 +5,21 @@ const audio = document.getElementById('mainAudio');
 
 // ── Built-in tracks (relative paths for GitHub Pages) ──
 const builtInTracks = [
-  { id: 'AML06', name: 'AML06.mp3', src: 'audio/AML06.mp3' },
-  { id: 'AML07', name: 'AML07.mp3', src: 'audio/AML07.mp3' },
-  { id: 'AML08', name: 'AML08.mp3', src: 'audio/AML08.mp3' },
-  { id: 'AML09', name: 'AML09.mp3', src: 'audio/AML09.mp3' },
-  { id: 'AML10', name: 'AML10.mp3', src: 'audio/AML10.mp3' },
-  { id: 'AML11', name: 'AML11.mp3', src: 'audio/AML11.mp3' },
-  { id: 'AML12', name: 'AML12.mp3', src: 'audio/AML12.mp3' },
-  { id: 'AML14', name: 'AML14.mp3', src: 'audio/AML14.mp3' },
-  { id: 'AML15', name: 'AML15.mp3', src: 'audio/AML15.mp3' },
+  { id: 'AML01', name: 'Audio 1', elId: 'audio_AML01' },
+  { id: 'AML02', name: 'Audio 2', elId: 'audio_AML02' },
+  { id: 'AML03', name: 'Audio 3', elId: 'audio_AML03' },
+  { id: 'AML04', name: 'Audio 4', elId: 'audio_AML04' },
+  { id: 'AML05', name: 'Audio 5', elId: 'audio_AML05' },
+  { id: 'AML06', name: 'Audio 6', elId: 'audio_AML06' },
+  { id: 'AML07', name: 'Audio 7', elId: 'audio_AML07' },
+  { id: 'AML08', name: 'Audio 8', elId: 'audio_AML08' },
+  { id: 'AML09', name: 'Audio 9', elId: 'audio_AML09' },
+  { id: 'AML10', name: 'Audio 10', elId: 'audio_AML10' },
+  { id: 'AML11', name: 'Audio 11', elId: 'audio_AML11' },
+  { id: 'AML12', name: 'Audio 12', elId: 'audio_AML12' },
+  { id: 'AML13', name: 'Audio 13', elId: 'audio_AML13' },
+  { id: 'AML14', name: 'Audio 14', elId: 'audio_AML14' },
+  { id: 'AML15', name: 'Audio 15', elId: 'audio_AML15' },
 ];
 
 // ── Storage ──
@@ -80,7 +86,8 @@ function loadSampleTrack(id) {
   const track = builtInTracks.find(t => t.id === id);
   if (!track) return;
   currentTrackId = id;
-  audio.src = track.src;
+  const srcEl = document.getElementById(track.elId);
+  audio.src = srcEl ? srcEl.getAttribute('src') : '';
 
   const saved = loadState('track_' + id);
   audio.addEventListener('loadedmetadata', () => {
