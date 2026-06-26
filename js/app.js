@@ -20,6 +20,11 @@ const builtInTracks = [
   { id: 'AML13', name: 'Audio 13', elId: 'audio_AML13' },
   { id: 'AML14', name: 'Audio 14', elId: 'audio_AML14' },
   { id: 'AML15', name: 'Audio 15', elId: 'audio_AML15' },
+  { id: 'AML16', name: 'Audio 16', elId: 'audio_AML16' },
+  { id: 'AMS02', name: 'Audio 17', elId: 'audio_AMS02' },
+  { id: 'AMS03', name: 'Audio 18', elId: 'audio_AMS03' },
+  { id: 'AMS05', name: 'Audio 19', elId: 'audio_AMS05' },
+  { id: 'AMS06', name: 'Audio 20', elId: 'audio_AMS06' },
 ];
 
 // ── Storage ──
@@ -265,15 +270,33 @@ function renderHistory() {
     const date = data.saved_at ? new Date(data.saved_at).toLocaleString() : '';
     const item = document.createElement('div');
     item.className = 'history-item';
+    item.style.cursor = 'pointer';
     item.innerHTML = `
       <div class="h-icon">📄</div>
-      <div>
+      <div style="flex:1;">
         <div class="h-name">${data.trackName || id}</div>
         <div class="h-meta">${date}</div>
       </div>
       <span class="h-badge">✓</span>
       <span class="h-words">${words} words</span>
     `;
+    item.addEventListener('click', () => {
+      // Find the track in builtInTracks
+      const track = builtInTracks.find(t => t.id === id);
+      if (track) {
+        loadSampleTrack(id);
+      } else {
+        // Uploaded file - just restore transcript
+        currentTrackId = id;
+        document.getElementById('fileName').textContent = data.trackName || id;
+        document.getElementById('fileMeta').textContent = 'From history';
+        document.getElementById('fileCard').style.display = 'block';
+        document.getElementById('transcriptArea').value = data.text || '';
+        updateStats();
+        showView('dashboard');
+        updateStatus('Restored: ' + (data.trackName || id), 'Transcript loaded from history', 100);
+      }
+    });
     list.appendChild(item);
   });
 }
